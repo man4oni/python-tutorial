@@ -1,7 +1,7 @@
 def sum_of_digits(n):
-    num_str = str(abs(n))
+    num_str = str( abs(n) )
     sum = 0
-    for i in range(0, len(num_str)):
+    for i in range( len(num_str) ):
         sum += int(num_str[i])
     return sum
 
@@ -11,7 +11,9 @@ def to_digits(n):
 
 
 def count_vowels(str):
-    list=("a","e","i","o","u","A","E","I","O","U")
+    sum=0
+    list=("a","e","i","o","u","y")
     for i in str:
-        if i in list:
-            return
+        if i.lower() in list:
+            sum += 1
+    return sum
