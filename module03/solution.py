@@ -32,7 +32,7 @@ def count_vowels(str):
 def count_consonants(str):
     sum = 0
     cons = ("b", "c", "d", "f", "g", "h", "j", "k", "l", "m", "n", "p", "q", "r", "s", "t", "v", "w", "x", "z")
-    for i in str:
+    for i in (str):
         if i.lower() in cons:
             sum += 1
     return sum
@@ -52,9 +52,9 @@ def fact_digits(n):
     sum=0
     mul=1
     num = str(n)
-    for k in range(len(num)):
+    for k in range( len(num) ):
         mul=1
-        for i in range(1,(int(num[k])+1)):
+        for i in range(1,( int(num[k]) + 1) ):
             mul=i*mul
         sum+=mul
     return sum
@@ -84,7 +84,7 @@ def fib_number(n):
     for i in range(2, n):
         lst.append(lst[i-1] + lst[i-2])
         list = [str(i) for i in lst]
-        list1 = int("".join(list))
+        list1 = int( "".join(list) )
     return list1
 
 
@@ -93,4 +93,10 @@ def palindrome(obj):
     return pali
 
 
-
+###########################
+def char_histogram(string):
+    list_fill = []
+    for i in (string):
+        list_fill.append( string.count(i) )
+        dict = {k:v for k, v in zip( string, list_fill )}
+    return dict
