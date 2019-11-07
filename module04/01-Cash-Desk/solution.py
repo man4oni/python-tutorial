@@ -38,7 +38,31 @@ class BatchBill():
         return res
 
 class CashDesk(object):
-   pass
 
+
+    def __init__(self,res=None):
+        self.t=res
+        if res==None:
+            self.t=0
+
+
+    def take_money(self, money):
+
+        if isinstance(money, Bill):
+            self.m = int(money)
+        elif isinstance(money, BatchBill) :
+            self.m= [int(x) for x in money]
+        if type(self.m)==int:
+            self.t+=self.m
+        if type(self.m)==list:
+            for x in self.m:
+                self.t+=x
+        return self.t
+
+    def total(self):
+        return self.t
+
+    def inspect(self):
+        pass
 
 
