@@ -1,9 +1,10 @@
+
 class Bill(object):
     def __init__(self,amount):
-        self.amount=amount
+        self.amount = amount
         if amount < 0:
             raise ValueError('amount must be positive ')
-        if type(amount) != int:
+        if type( amount ) != int:
             raise TypeError('amount must be INT')
 
     def __str__(self):
@@ -20,10 +21,15 @@ class Bill(object):
                 self.amount == other.amount
         )
 
+
+
+
+
+
 class BatchBill():
-    def __init__(self,Bills):
+    def __init__(self, Bills):
         #bills = [int(i) for i in Bills]
-        self.batch=list(Bills)
+        self.batch = list( Bills )
     def __len__(self):
         return len(self.batch)
 
@@ -31,8 +37,8 @@ class BatchBill():
         return self.batch[index]
 
     def total(self):
-        res=0
-        num_bills=[int(i) for i in self.batch]
+        res = 0
+        num_bills = [int(i) for i in self.batch]
         for i in num_bills:
             res += i
         return res
@@ -40,29 +46,46 @@ class BatchBill():
 class CashDesk(object):
 
 
-    def __init__(self,res=None):
-        self.t=res
-        if res==None:
-            self.t=0
-
-
+    def __init__(self,res = None):
+        self.balance = res
+        if res == None:
+            self.balance = 0
+        self.desk = {5:0, 10:0, 15:0}
+        self.bills = []
     def take_money(self, money):
-
         if isinstance(money, Bill):
-            self.m = int(money)
-        elif isinstance(money, BatchBill) :
-            self.m= [int(x) for x in money]
-        if type(self.m)==int:
-            self.t+=self.m
-        if type(self.m)==list:
-            for x in self.m:
-                self.t+=x
-        return self.t
+            self.bills.append(int(money))
+        if isinstance(money, BatchBill):
+            for x in money:
+                self.bills.append(int(x))
+
+        return self.bills
+
+
+
+
 
     def total(self):
-        return self.t
+        for bill in self.bills:
+            self.balance += bill
+        return self.balance
+
 
     def inspect(self):
-        pass
+        for key in self.bills:
+            if key in self.desk.keys():
+                self.desk[key] = self.desk[key] + 1
+
+
+        pr = (f'We have a total of {self.total()}$ in the desk\n'
+            'We have the following count of bills, sorted in ascending order:')
+
+        for key, value in self.desk.items():
+            pr += ('\n'f'{key}$ bills - {value}')
+
+        return  pr
+
+
+
 
 
