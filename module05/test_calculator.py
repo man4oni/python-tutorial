@@ -2,12 +2,13 @@ import unittest
 from unittest.mock import patch
 from unittest import mock
 from calculator import *
-from selenium import webdriver
-d=webdriver.chrome
+
+
 
 
 
 class CalculatorTestCase(unittest.TestCase):
+
     def test_add(self):
 
         result=add(2,2)
@@ -15,6 +16,7 @@ class CalculatorTestCase(unittest.TestCase):
         self.assertTrue(isinstance(result, int))
         self.assertEqual(result, 4)
         self.assertEqual(add(3, 2), 5)
+        self.assertRaises(TypeError,add('six','ten'))
 
     def test_subtract(self):
         self.assertEqual(subtract(2, 2), 0)
@@ -30,26 +32,8 @@ class CalculatorTestCase(unittest.TestCase):
         self.assertEqual(divide(3, 3), 1)
         self.assertEqual(divide(3.0, 2), 1.5)
         self.assertEqual(divide(6, 2), 3)
-
-
-
-    def test_action(self):
-        pass
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        with self.assertRaises( ZeroDivisionError):
+            divide(3, 0)
 
 
 
