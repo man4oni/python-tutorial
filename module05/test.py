@@ -71,7 +71,7 @@ class TestCalculatorTestCase(unittest.TestCase):
             del sys.modules['calculator']
 
         with unittest.mock.patch('sys.stdout', new_callable=StringIO) as _stdout, \
-             unittest.mock.patch('builtins.input', return_value=1) as _input:
+                unittest.mock.patch('builtins.input', return_value=1) as _input:
             import calculator
             # print was never called
             self.assertEqual('', _stdout.getvalue().strip())
