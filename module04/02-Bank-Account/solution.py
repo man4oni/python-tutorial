@@ -7,7 +7,8 @@ class BankAccount(object):
         if balance < 0:
             raise ValueError('balance cant be negative')
         self._history=['Account was created']
-
+        if len(self.currency)<1:
+            raise ValueError('currency cant be empty')
 
     def deposit(self, amount):
         if amount <= 0:
@@ -48,14 +49,17 @@ class BankAccount(object):
         return self._balance
 
     def transfer_to(self,account, amount):
-        self.acc=account
-        self.money=amount
-        if self.currency==account.currency:
-            if amount <= self._balance:
-                self._balance -= amount
-                account._balance += amount
-                self._history.append("Transfer to "+account.name+" for "+str(self.money)+self.currency)
-                return account.balance()
-            else:
-                raise TypeError('choose the correct currency')
+
+        if self.currency!=account.currency:
+            raise TypeError('choose the correct currency')
+        if amount < 0:
+                raise ValueError('amounmt must be positive')
+        if amount > self._balance:
+            raise Exception('not enough money ')
+        else:
+            self._balance -= amount
+            account._balance += amount
+            self._history.append("Transfer to "+account.name+" for "+str(amount)+self.currency)
+        return account.balance()
+
 
